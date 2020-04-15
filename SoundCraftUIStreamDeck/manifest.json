@@ -1,0 +1,43 @@
+{
+  "Actions": [
+    {
+      "Icon": "Images/icon",
+      "Name": "Change Snapshot",
+      "States": [
+        {
+          "Image": "Images/pluginAction",
+          "TitleAlignment": "middle",
+          "FontSize": "12"
+        },
+        {
+          "Image": "Images/pluginIcon",
+          "TitleAlignment": "middle",
+          "FontSize": "12"
+        }
+      ],
+      "SupportedInMultiActions": false,
+      "Tooltip": "Change Mixer Snapshot",
+      "UUID": "org.m-a-b.soundcraftuisnap",
+      "PropertyInspectorPath": "PropertyInspector/PIActions/Snapshot.html"
+    }
+  ],
+  "Author": "Manu",
+  "Name": "SoundCraftUIStreamDeck",
+  "Description": "SoundCraft Mixer UI",
+  "Icon": "Images/pluginIcon",
+  "URL": "www.google.de",
+  "Version": "1.0",
+  "CodePath": "org.m-a-b.soundcraftui",
+  "Category": "SoundCraftUI",
+  "CategoryIcon": "Images/categoryIcon",
+  "OS": [
+    {
+      "Platform": "windows",
+      "MinimumVersion": "10"
+    }
+  ],
+  "SDKVersion": 2,
+  "Software": {
+    "MinimumVersion": "4.3"
+  }
+}
