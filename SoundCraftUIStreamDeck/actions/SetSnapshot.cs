@@ -1,14 +1,9 @@
 ﻿using BarRaider.SdTools;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
+//using System.Threading;
 using System.Threading.Tasks;
-using UIsocket;
+using UIControl;
 
 namespace SoundCraftUIStreamDeck
 {
@@ -19,10 +14,12 @@ namespace SoundCraftUIStreamDeck
         {
             public static PluginSettings CreateDefaultSettings()
             {
-                PluginSettings instance = new PluginSettings();
-                instance.ShowName = string.Empty;
-                instance.SnapshotName = string.Empty;
-                instance.CueName = string.Empty;
+                PluginSettings instance = new PluginSettings
+                {
+                    ShowName = string.Empty,
+                    SnapshotName = string.Empty,
+                    CueName = string.Empty
+                };
                 return instance;
             }
             [JsonProperty(PropertyName = "showName")]
@@ -40,7 +37,7 @@ namespace SoundCraftUIStreamDeck
         #endregion
         public SetSnapshot(SDConnection connection, InitialPayload payload) : base(connection, payload)
         {
-            if (payload.Settings == null || payload.Settings.Count == 0)
+            if (payload.Settings is null || payload.Settings.Count == 0)
             {
                 this.settings = PluginSettings.CreateDefaultSettings();
                 Connection.SetSettingsAsync(JObject.FromObject(settings));
@@ -49,12 +46,12 @@ namespace SoundCraftUIStreamDeck
             {
                 this.settings = payload.Settings.ToObject<PluginSettings>();
             }
-           
+            ConMan.ClientActive(true);
         }
 
         public override void Dispose()
         {
-            Logger.Instance.LogMessage(TracingLevel.INFO, $"Destructor called");
+            ConMan.ClientActive(false);
         }
 
         public async override void KeyPressed(KeyPayload payload)
@@ -64,41 +61,46 @@ namespace SoundCraftUIStreamDeck
                 await Connection.ShowAlert();
                 return;
             }
-            if (settings.SnapshotName != "" && settings.CueName != "") {
-                ConMan.client.ChangeSnapshot(settings.ShowName, settings.SnapshotName);
-                ConMan.client.ChangeCue(settings.ShowName, settings.CueName);
-            } else if (settings.SnapshotName != "")
+            if (settings.SnapshotName != "" && settings.CueName != "")
             {
                 ConMan.client.ChangeSnapshot(settings.ShowName, settings.SnapshotName);
-            } else if (settings.CueName != "")
+                Task.Delay(100).Wait();
+                ConMan.client.ChangeCue(settings.ShowName, settings.CueName);
+            }
+            else if (settings.SnapshotName != "")
+            {
+                ConMan.client.ChangeSnapshot(settings.ShowName, settings.SnapshotName);
+            }
+            else if (settings.CueName != "")
             {
                 ConMan.client.ChangeCue(settings.ShowName, settings.CueName);
-            } else
+            }
+            else
             {
                 Logger.Instance.LogMessage(TracingLevel.ERROR, "Key Pressed but now Show is set");
             }
 
-            Logger.Instance.LogMessage(TracingLevel.INFO, "Key Pressed");
         }
 
         public override void KeyReleased(KeyPayload payload) { }
 
-        public async override void OnTick() {
+        public async override void OnTick()
+        {
             if (!ConMan.Instance.IsConnected)
             {
                 await Connection.ShowAlert();
+                //  Logger.Instance.LogMessage(TracingLevel.ERROR, "Active Clients: "+ConMan.ActiveClients +"Connected: "+ConMan.Instance.IsConnected);
                 return;
             }
 
-
-            //if (ConMan.client.CheckState(settings.ShowName, settings.SnapshotName, settings.CueName))
-            //{
-            //    await Connection.SetStateAsync(0);
-
-            //} else
-            //{
-            //    await Connection.SetStateAsync(1);
-            //}
+            if (CheckState())
+            {
+                await Connection.SetStateAsync(0);
+            }
+            else
+            {
+                await Connection.SetStateAsync(1);
+            }
         }
 
         public override void ReceivedSettings(ReceivedSettingsPayload payload)
@@ -114,6 +116,14 @@ namespace SoundCraftUIStreamDeck
         private Task SaveSettings()
         {
             return Connection.SetSettingsAsync(JObject.FromObject(settings));
+        }
+
+        private bool CheckState()
+        {
+            if (settings.ShowName == ConnectionClass.Show && settings.SnapshotName == ConnectionClass.Snapshot && settings.CueName == ConnectionClass.Cue) return true;
+            else if (settings.ShowName == ConnectionClass.Show && settings.SnapshotName == ConnectionClass.Snapshot && settings.CueName == "") return true;
+            else if (settings.ShowName == ConnectionClass.Show && settings.CueName == ConnectionClass.Cue && settings.SnapshotName == "") return true;
+            else return false;
         }
 
         #endregion

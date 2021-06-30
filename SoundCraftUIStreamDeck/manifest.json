@@ -1,35 +1,95 @@
 {
   "Actions": [
     {
-      "Icon": "Images/icon",
+      "Icon": "Images/action1",
       "Name": "Change Snapshot",
       "States": [
         {
-          "Image": "Images/pluginAction",
+          "Image": "Images/action1",
           "TitleAlignment": "middle",
           "FontSize": "12"
         },
         {
-          "Image": "Images/pluginIcon",
+          "Image": "Images/action1",
+          "TitleAlignment": "middle",
+          "FontSize": "12"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "Tooltip": "Change Mixer Snapshot",
+      "UUID": "org.m-a-b.soundcraftuisnap",
+      "PropertyInspectorPath": "PropertyInspector/PIActions/Snapshot.html"
+    },
+    {
+      "Icon": "Images/action2",
+      "Name": "Change MuteGroup",
+      "States": [
+        {
+          "Image": "Images/action2",
+          "TitleAlignment": "middle",
+          "FontSize": "12"
+        },
+        {
+          "Image": "Images/action2",
+          "TitleAlignment": "middle",
+          "FontSize": "12"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "Tooltip": "Change Mixer MuteGroup",
+      "UUID": "org.m-a-b.soundcraftuimutegroup",
+      "PropertyInspectorPath": "PropertyInspector/PIActions/MuteGroups.html"
+    },
+    {
+      "Icon": "Images/action1",
+      "Name": "Diverse Buttons",
+      "States": [
+        {
+          "Image": "Images/action1",
+          "TitleAlignment": "middle",
+          "FontSize": "12"
+        },
+        {
+          "Image": "Images/action1",
+          "TitleAlignment": "middle",
+          "FontSize": "12"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "Tooltip": "Diverse Buttons",
+      "UUID": "org.m-a-b.soundcraftuidivbuttons",
+      "PropertyInspectorPath": "PropertyInspector/PIActions/DivButtons.html"
+    },
+    {
+      "Icon": "Images/action2",
+      "Name": "Change Mute or Solo",
+      "States": [
+        {
+          "Image": "Images/action2",
+          "TitleAlignment": "middle",
+          "FontSize": "12"
+        },
+        {
+          "Image": "Images/action2",
           "TitleAlignment": "middle",
           "FontSize": "12"
         }
       ],
       "SupportedInMultiActions": false,
-      "Tooltip": "Change Mixer Snapshot",
-      "UUID": "org.m-a-b.soundcraftuisnap",
-      "PropertyInspectorPath": "PropertyInspector/PIActions/Snapshot.html"
+      "Tooltip": "Change Mixer Channel Solo or Mute",
+      "UUID": "org.m-a-b.soundcraftuimutesolochannel",
+      "PropertyInspectorPath": "PropertyInspector/PIActions/MuteSolo.html"
     }
   ],
   "Author": "Manu",
   "Name": "SoundCraftUIStreamDeck",
   "Description": "SoundCraft Mixer UI",
-  "Icon": "Images/pluginIcon",
+  "Icon": "Images/icon",
   "URL": "www.google.de",
-  "Version": "1.0",
+  "Version": "1.70",
   "CodePath": "org.m-a-b.soundcraftui",
   "Category": "SoundCraftUI",
-  "CategoryIcon": "Images/categoryIcon",
+  "CategoryIcon": "Images/icon",
   "OS": [
     {
       "Platform": "windows",

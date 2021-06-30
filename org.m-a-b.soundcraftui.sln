@@ -3,11 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "org.m-a-b.soundcraftui", "SoundCraftUIStreamDeck\org.m-a-b.soundcraftui.csproj", "{4635D874-69C0-4010-BE46-77EF92EB1553}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "org.m-a-b.soundcraftui", "SoundCraftUIStreamDeck\org.m-a-b.soundcraftui.csproj", "{4635D874-69C0-4010-BE46-77EF92EB1553}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIsocket", "UIsocket\UIsocket.csproj", "{796A8E4C-61C5-497F-B345-F515A9AECD29}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SetDefaultMixer", "TestUI\SetDefaultMixer.csproj", "{8E324394-77C0-4824-BA8F-E4346592D6D8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4D4AFAB1-1113-45F2-90C3-238F4D43FAA8} = {4D4AFAB1-1113-45F2-90C3-238F4D43FAA8}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestUI", "TestUI\TestUI.csproj", "{8E324394-77C0-4824-BA8F-E4346592D6D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UIControl", "UIControl\UIControl.csproj", "{4D4AFAB1-1113-45F2-90C3-238F4D43FAA8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +22,14 @@ Global
 		{4635D874-69C0-4010-BE46-77EF92EB1553}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4635D874-69C0-4010-BE46-77EF92EB1553}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4635D874-69C0-4010-BE46-77EF92EB1553}.Release|Any CPU.Build.0 = Release|Any CPU
-		{796A8E4C-61C5-497F-B345-F515A9AECD29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{796A8E4C-61C5-497F-B345-F515A9AECD29}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{796A8E4C-61C5-497F-B345-F515A9AECD29}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{796A8E4C-61C5-497F-B345-F515A9AECD29}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8E324394-77C0-4824-BA8F-E4346592D6D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8E324394-77C0-4824-BA8F-E4346592D6D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E324394-77C0-4824-BA8F-E4346592D6D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E324394-77C0-4824-BA8F-E4346592D6D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D4AFAB1-1113-45F2-90C3-238F4D43FAA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D4AFAB1-1113-45F2-90C3-238F4D43FAA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D4AFAB1-1113-45F2-90C3-238F4D43FAA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D4AFAB1-1113-45F2-90C3-238F4D43FAA8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
