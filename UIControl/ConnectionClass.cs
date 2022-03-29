@@ -175,7 +175,7 @@ namespace UIControl
         {
             if (null != MixConnection && MixConnection?.Connected == false)
             {
-                MixConnection.Start();
+                MixConnection.StartWithTimeoutAsync(5);
                 Task.Delay(100).Wait();
             }
 

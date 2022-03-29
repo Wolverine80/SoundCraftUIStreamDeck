@@ -16,17 +16,21 @@ namespace SoundCraftUIStreamDeck
             {
                 PluginSettings instance = new PluginSettings
                 {
-                    MuteGroup = string.Empty
+                    MuteGroup = string.Empty,
+                    PTT = false
                 };
                 return instance;
             }
             [JsonProperty(PropertyName = "muteGroup")]
             public string MuteGroup { get; set; }
+            [JsonProperty(PropertyName = "ptt")]
+            public bool PTT { get; set; }
         }
 
         #region Private Members
 
         private PluginSettings settings;
+        private Enums.MuteFLags GSettingsMute;
 
         #endregion
         public MuteGroups(SDConnection connection, InitialPayload payload) : base(connection, payload)
@@ -42,6 +46,7 @@ namespace SoundCraftUIStreamDeck
             }
             ConMan.ClientActive(true);
             ConnectionClass.MuteEvent += OnMuteEvent;
+            Enum.TryParse(settings.MuteGroup, out GSettingsMute);
         }
 
 
@@ -60,20 +65,34 @@ namespace SoundCraftUIStreamDeck
             }
             if (settings.MuteGroup != string.Empty)
             {
-                Enum.TryParse(settings.MuteGroup, out Enums.MuteFLags SettingsMute);
-
-                if (ConvertMuteFlags())
+                if (ConvertMuteFlags() == true)
                 {
-                    ConMan.client.ChangeMuteGroup(ConnectionClass.MuteGroupVal - (uint)SettingsMute);
+                    ConMan.client.ChangeMuteGroup(ConnectionClass.MuteGroupVal - (uint)GSettingsMute);
                 }
                 else
-                {
-                    ConMan.client.ChangeMuteGroup(ConnectionClass.MuteGroupVal + (uint)SettingsMute);
+                {   if (settings.PTT == false)
+                    {
+                        ConMan.client.ChangeMuteGroup(ConnectionClass.MuteGroupVal + (uint)GSettingsMute);
+                    }
                 }
             }
         }
 
-        public override void KeyReleased(KeyPayload payload) { }
+        public async override void KeyReleased(KeyPayload payload) 
+        {
+            if (!ConMan.Instance.IsConnected)
+            {
+                await Connection.ShowAlert();
+                return;
+            }
+            if (settings.MuteGroup != string.Empty)
+            {
+                if ( settings.PTT == true)
+                {
+                    ConMan.client.ChangeMuteGroup(ConnectionClass.MuteGroupVal + (uint)GSettingsMute);
+                }
+            }
+        }
         public async override void OnTick()
         {
             if (!ConMan.Instance.IsConnected)
@@ -124,9 +143,8 @@ namespace SoundCraftUIStreamDeck
 
         private bool ConvertMuteFlags()
         {
-            Enum.TryParse(settings.MuteGroup, out Enums.MuteFLags SettingsMute);
             Enums.MuteFLags MuteGroupFlags = (Enums.MuteFLags)ConnectionClass.MuteGroupVal;
-            if (MuteGroupFlags.HasFlag(SettingsMute))
+            if (MuteGroupFlags.HasFlag(GSettingsMute))
             {
                 return true;
             }
