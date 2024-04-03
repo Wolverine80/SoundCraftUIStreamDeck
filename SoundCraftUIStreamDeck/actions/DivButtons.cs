@@ -7,7 +7,7 @@ using UIControl;
 namespace SoundCraftUIStreamDeck
 {
     [PluginActionId("org.m-a-b.soundcraftuidivbuttons")]
-    public class DivButtons : PluginBase
+    public class DivButtons : KeypadBase
     {
         private class PluginSettings
         {

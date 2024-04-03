@@ -8,7 +8,7 @@ using UIControl;
 namespace SoundCraftUIStreamDeck
 {
     [PluginActionId("org.m-a-b.soundcraftuisnap")]
-    public class SetSnapshot : PluginBase
+    public class SetSnapshot : KeypadBase
     {
         private class PluginSettings
         {

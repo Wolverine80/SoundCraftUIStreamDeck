@@ -11,7 +11,8 @@
             {
                 Mute = false,
                 Solo = false,
-                Stereo = false
+                Stereo = false,
+                Volume = 0.0
             };
             ChannelNumbner = channelNumber;
             Channeltype = channeltype;
@@ -23,6 +24,7 @@
             public bool Mute { get; set; }
             public bool Solo { get; set; }
             public bool Stereo { get; set; }
+            public double Volume { get; set; }
         }
 
     }
