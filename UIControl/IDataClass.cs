@@ -10,6 +10,7 @@ namespace UIControl
         void ChangeMuteGroup(uint mgroup);
         void ChangeSnapshot(string Show, string Snapshot);
         void ClearSolo(Channel[][] Channels);
+        void ChangeVolume(Channeltype channeltype, int channel, double volume);
         void MuteChannel(Channeltype channeltype, int channel, bool on);
         void SoloChannel(Channeltype channeltype, int channel, bool on);
         void SoloPrep(bool on);

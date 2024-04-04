@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -40,7 +41,7 @@ namespace UIControl
             Channels[4] = new Channel[6];
             Channels[5] = new Channel[10];
             Channels[6] = new Channel[6];
-            Channels[7] = new Channel[2];
+            Channels[7] = new Channel[1];
 
             for (byte o = 0; o < Channels.GetLength(0); o++)
             {
@@ -139,6 +140,30 @@ namespace UIControl
                         onoff = true;
                     }
                     Channels[(int)channeltypeStereo][channel].Settings.Stereo = onoff;
+                }
+                var regVolume = Regex.Match(Daten, @"SETD\^([ilpfsavm])\.([\d]{1,2})\.mix\^(.*)");
+                if (regVolume.Success)
+                {
+                    byte channel = byte.Parse(regVolume.Groups[2].Value);
+                    Enum.TryParse(regVolume.Groups[1].Value, out Channeltype channeltypeV);
+                    double volume;
+                    if (double.TryParse(regVolume.Groups[3].Value, NumberStyles.Number, CultureInfo.InvariantCulture, out volume))
+                    {
+                        Channels[(int)channeltypeV][channel].Settings.Volume = volume;
+                    }
+
+                }
+                var regVolumeMaster = Regex.Match(Daten, @"SETD\^m\.mix\^(.*)");
+                if (regVolumeMaster.Success)
+                {
+                    byte channel = 0;
+                    Enum.TryParse("m", out Channeltype channeltypeV);
+                    double volume;
+                    if (double.TryParse(regVolumeMaster.Groups[1].Value, NumberStyles.Number, CultureInfo.InvariantCulture, out volume))
+                    {
+                        Channels[(int)channeltypeV][channel].Settings.Volume = volume;
+                    }
+
                 }
             }
         }

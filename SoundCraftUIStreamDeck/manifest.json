@@ -79,6 +79,31 @@
       "Tooltip": "Change Mixer Channel Solo or Mute",
       "UUID": "org.m-a-b.soundcraftuimutesolochannel",
       "PropertyInspectorPath": "PropertyInspector/PIActions/MuteSolo.html"
+    },
+    {
+      "Icon": "Images/action1",
+      "Name": "Volume",
+      "States": [
+        {
+          "Image": "Images/action1",
+          "TitleAlignment": "middle",
+          "FontSize": "12"
+        }
+      ],
+      "Controllers": [ "Encoder" ],
+      "Encoder": {
+        "layout": "VolDialLayout.json",
+        "TriggerDescription": {
+          "Rotate": "Increase/Decrease",
+          "Push": "Toggle mute"
+        }
+      },
+      "SupportedInMultiActions": false,
+      "DisableCaching": true,
+      "UserTitleEnabled": true,
+      "Tooltip": "Volume Knob",
+      "UUID": "org.m-a-b.soundcraftuiencodervol",
+      "PropertyInspectorPath": "PropertyInspector/PIActions/ChangeVolume.html"
     }
   ],
   "Author": "Manu",
@@ -86,7 +111,7 @@
   "Description": "SoundCraft Mixer UI",
   "Icon": "Images/icon",
   "URL": "www.google.de",
-  "Version": "1.75",
+  "Version": "1.98",
   "CodePath": "org.m-a-b.soundcraftui",
   "Category": "SoundCraftUI",
   "CategoryIcon": "Images/icon",

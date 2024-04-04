@@ -37,7 +37,7 @@ namespace SoundCraftUIStreamDeck
             if (ActiveClients > 0)
             {
                 ConnectionClass.KeepAlive();
-                if (instance.IsConnected == false)
+                if (instance?.IsConnected == false)
                 {
                     KillInstance();
                 }

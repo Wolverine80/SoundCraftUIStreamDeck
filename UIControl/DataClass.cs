@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Threading.Tasks;
 using UIControl.enums;
 using WatsonWebsocket;
@@ -91,6 +92,22 @@ namespace UIControl
                     ws.SendAsync($"3:::SETD^{ channeltype }.{ channel + 1 }.solo^{ onoff }");
                 }
             }
+        }
+
+        public void ChangeVolume(Channeltype channeltype, int channel, double volume)
+        {
+            ws.SendAsync($"3:::SETD^{channeltype}.{channel}.mix^{volume.ToString(CultureInfo.InvariantCulture)}");
+            ConnectionClass.Channels[(byte)channeltype][channel].Settings.Volume= volume;
+            if (ConnectionClass.Channels[(byte)channeltype][channel].Settings.Stereo && channel % 2 == 0)
+            {
+                ConnectionClass.Channels[(byte)channeltype][channel + 1].Settings.Volume = volume;
+                ws.SendAsync($"3:::SETD^{channeltype}.{channel + 1}.mix^{volume.ToString(CultureInfo.InvariantCulture)}");
+            }
+        }
+        public void ChangeVolume(Channeltype channeltype, double volume)
+        {
+            ws.SendAsync($"3:::SETD^{channeltype}.mix^{volume.ToString(CultureInfo.InvariantCulture)}");
+            ConnectionClass.Channels[(byte)channeltype][0].Settings.Volume = volume;
         }
         public void Dim(bool on)
         {

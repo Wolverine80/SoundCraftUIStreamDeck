@@ -8,7 +8,7 @@ using UIControl;
 namespace SoundCraftUIStreamDeck
 {
     [PluginActionId("org.m-a-b.soundcraftuimutegroup")]
-    public class MuteGroups : PluginBase
+    public class MuteGroups : KeypadBase
     {
         private class PluginSettings
         {
@@ -87,7 +87,7 @@ namespace SoundCraftUIStreamDeck
             }
             if (settings.MuteGroup != string.Empty)
             {
-                if ( settings.PTT == true)
+                if ( settings.PTT == true && ConvertMuteFlags() == false )
                 {
                     ConMan.client.ChangeMuteGroup(ConnectionClass.MuteGroupVal + (uint)GSettingsMute);
                 }

@@ -7,7 +7,7 @@ using UIControl;
 namespace SoundCraftUIStreamDeck
 {
     [PluginActionId("org.m-a-b.soundcraftuimutesolochannel")]
-    public class MuteSoloChannel : PluginBase
+    public class MuteSoloChannel : KeypadBase
     {
         private bool MuteOn { get; set; } = false;
         private bool SoloOn { get; set; } = false;
